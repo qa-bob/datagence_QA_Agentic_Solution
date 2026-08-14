@@ -10,10 +10,11 @@
  */
 
 import { test as base, expect } from '@playwright/test';
-import { loadSiteConfig, type SiteConfig } from '@types/site-config.types';
+import { loadSiteConfig, type SiteConfig } from '@site-types/site-config.types';
 import { HomePage } from '@pages/home.page';
 import { NavigationPage } from '@pages/navigation.page';
 import { ContactFormPage } from '@pages/contact.page';
+import { DatagencePage } from '@pages/datagence.page';
 
 // ── Fixture type definitions ─────────────────────────────────────────────────
 
@@ -26,6 +27,8 @@ export interface Fixtures {
   navigationPage: NavigationPage;
   /** ContactFormPage page object (does not auto-navigate) */
   contactPage: ContactFormPage;
+  /** DatagencePage — site-specific page object for Datagence-specific selectors */
+  datagencePage: DatagencePage;
 }
 
 // ── Extended test object ─────────────────────────────────────────────────────
@@ -66,6 +69,15 @@ export const test = base.extend<Fixtures>({
   contactPage: async ({ page, siteConfig }, use) => {
     const contactPage = new ContactFormPage(page, siteConfig);
     await use(contactPage);
+  },
+
+  /**
+   * datagencePage — constructs DatagencePage without navigating.
+   * Provides Datagence-specific locators: Polus features, statistics, CTAs, outcomes.
+   */
+  datagencePage: async ({ page, siteConfig }, use) => {
+    const datagencePage = new DatagencePage(page, siteConfig);
+    await use(datagencePage);
   },
 });
 

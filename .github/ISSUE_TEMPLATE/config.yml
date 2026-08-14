@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/rosmall/datagence_QA_Agentic_Solution/discussions
+    about: Ask about the test framework or how to contribute

@@ -1,0 +1,17 @@
+# Global owners — required review on any change
+* @rosmall
+
+# Framework changes
+src/ @rosmall
+playwright.config.ts @rosmall
+tsconfig.json @rosmall
+package.json @rosmall
+
+# Claude Code configuration
+.claude/ @rosmall
+CLAUDE.md @rosmall
+AGENTS.md @rosmall
+SKILLS.md @rosmall
+
+# CI/CD
+.github/ @rosmall
