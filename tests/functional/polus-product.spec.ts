@@ -136,15 +136,14 @@ test.describe('Polus HCP Product Section @functional', () => {
     ).toBeGreaterThan(0);
   });
 
-  test('Solutions nav references Healthcare Provider Data @functional', async ({ page, siteConfig }) => {
+  test('Solutions nav references Healthcare Provider Data @functional', async ({ page, siteConfig }, testInfo) => {
+    // Hover dropdowns are desktop-only — small viewports hide the nav behind a toggle
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     await page.goto(siteConfig.url, { waitUntil: 'domcontentloaded' });
 
     // Hover over Solutions to open the dropdown
     const solutionsItem = page.getByRole('navigation').getByText(/solutions/i).first();
-    if ((await solutionsItem.count()) === 0) {
-      console.warn('[functional] "Solutions" nav item not found — skipping dropdown test.');
-      return;
-    }
+    test.skip((await solutionsItem.count()) === 0, '"Solutions" nav item not found');
 
     await solutionsItem.hover();
 
@@ -162,14 +161,13 @@ test.describe('Polus HCP Product Section @functional', () => {
     ).toBeTruthy();
   });
 
-  test('Technology nav references Polus for Healthcare @functional', async ({ page, siteConfig }) => {
+  test('Technology nav references Polus for Healthcare @functional', async ({ page, siteConfig }, testInfo) => {
+    // Hover dropdowns are desktop-only — small viewports hide the nav behind a toggle
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     await page.goto(siteConfig.url, { waitUntil: 'domcontentloaded' });
 
     const techItem = page.getByRole('navigation').getByText(/technology/i).first();
-    if ((await techItem.count()) === 0) {
-      console.warn('[functional] "Technology" nav item not found — skipping dropdown test.');
-      return;
-    }
+    test.skip((await techItem.count()) === 0, '"Technology" nav item not found');
 
     await techItem.hover();
 
